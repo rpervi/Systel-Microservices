@@ -1,0 +1,13 @@
+# Standard .NET Ignore
+bin/
+obj/
+out/
+publish/
+
+# IDE Specific
+.vs/
+.vscode/
+*.user
+
+# Docker/K8s
+.dockerignore
