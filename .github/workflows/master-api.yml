@@ -1,0 +1,44 @@
+name: Master Service CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+    # Only trigger if files in these paths are modified
+    paths:
+      - 'Apps/MasterService/**'
+      - 'docker-compose.yml'
+      - '.github/workflows/master-api.yml'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          # Use GitHub's built-in registry for now
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Apps/MasterService/MasterService.Api/Dockerfile
+          push: true
+          # This tags the image with the branch name and the unique Git Commit ID
+          tags: |
+            ghcr.io/${{ github.repository }}/master-api:latest
+            ghcr.io/${{ github.repository }}/master-api:${{ github.sha }}
+
+  # Optional: Add a Deployment job here once your Azure/K8s is linked
