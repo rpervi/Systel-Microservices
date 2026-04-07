@@ -7,7 +7,7 @@ services:
     container_name: master-api-service
     build:
       context: .
-      dockerfile: MasterService/MasterService.Api/Dockerfile
+      dockerfile: Apps/MasterService/MasterService.Api/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       # Use the special DNS name for Windows Host

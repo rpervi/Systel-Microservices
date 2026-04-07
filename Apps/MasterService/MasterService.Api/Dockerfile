@@ -3,19 +3,19 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Copy all .csproj files first to restore dependencies (Optimizes Docker Cache)
-COPY ["MasterService/MasterService.Api/MasterService.Api.csproj", "MasterService/MasterService.Api/"]
-COPY ["MasterService/MasterService.Application/MasterService.Application.csproj", "MasterService/MasterService.Application/"]
-COPY ["MasterService/MasterService.Domain/MasterService.Domain.csproj", "MasterService/MasterService.Domain/"]
-COPY ["MasterService/MasterService.Infrastructure/MasterService.Infrastructure.csproj", "MasterService/MasterService.Infrastructure/"]
+COPY ["Apps/MasterService/MasterService.Api/MasterService.Api.csproj", "Apps/MasterService/MasterService.Api/"]
+COPY ["Apps/MasterService/MasterService.Application/MasterService.Application.csproj", "Apps/MasterService/MasterService.Application/"]
+COPY ["Apps/MasterService/MasterService.Domain/MasterService.Domain.csproj", "Apps/MasterService/MasterService.Domain/"]
+COPY ["Apps/MasterService/MasterService.Infrastructure/MasterService.Infrastructure.csproj", "Apps/MasterService/MasterService.Infrastructure/"]
 
 # Restore all projects
-RUN dotnet restore "MasterService/MasterService.Api/MasterService.Api.csproj"
+RUN dotnet restore "Apps/MasterService/MasterService.Api/MasterService.Api.csproj"
 
 # Copy the rest of the source code
 COPY . .
 
 # Build the Api project
-WORKDIR "/src/MasterService/MasterService.Api"
+WORKDIR "/src/Apps/MasterService/MasterService.Api"
 RUN dotnet build "MasterService.Api.csproj" -c Release -o /app/build
 
 # Stage 2: Publish the application
