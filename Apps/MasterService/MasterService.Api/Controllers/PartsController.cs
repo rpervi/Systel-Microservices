@@ -9,6 +9,7 @@ namespace MasterService.Api.Controllers;
 public class PartsController : ControllerBase
 {
     private readonly IPartRepository _repository;
+    private readonly ILogger<PartsController> _logger;
 
     // The Repository is injected here by the .NET Core DI container
     public PartsController(IPartRepository repository)
@@ -16,10 +17,17 @@ public class PartsController : ControllerBase
         _repository = repository;
     }
 
+    // Inject ILogger via Constructor
+    public PartsController(ILogger<PartsController> logger)
+    {
+        _logger = logger;
+    }
+
     // GET: api/parts
     [HttpGet]
     public async Task<ActionResult<IEnumerable<PartMaster>>> GetParts()
     {
+        _logger.LogInformation("MasterService: Fetching all parts from the database.");
         var parts = await _repository.GetAllAsync();
         return Ok(parts);
     }

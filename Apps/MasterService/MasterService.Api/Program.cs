@@ -2,6 +2,8 @@ using MasterService.Application.Interfaces;
 using MasterService.Infrastructure.Data;
 using MasterService.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Systel.Shared.Middleware;
+using Systel.Shared.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,10 @@ builder.Services.AddDbContext<MasterDbContext>(options =>
 
 builder.Services.AddScoped<IPartRepository, PartRepository>();
 
+// Register from Shared Library
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,6 +31,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandler();
+
+app.UseMiddleware<RequestLoggingMiddleware>();
 
 app.UseHttpsRedirection();
 
