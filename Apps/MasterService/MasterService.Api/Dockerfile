@@ -7,6 +7,7 @@ COPY ["Apps/MasterService/MasterService.Api/MasterService.Api.csproj", "Apps/Mas
 COPY ["Apps/MasterService/MasterService.Application/MasterService.Application.csproj", "Apps/MasterService/MasterService.Application/"]
 COPY ["Apps/MasterService/MasterService.Domain/MasterService.Domain.csproj", "Apps/MasterService/MasterService.Domain/"]
 COPY ["Apps/MasterService/MasterService.Infrastructure/MasterService.Infrastructure.csproj", "Apps/MasterService/MasterService.Infrastructure/"]
+COPY ["Systel.Shared/Systel.Shared.csproj", "Systel.Shared/"]
 
 # Restore all projects
 RUN dotnet restore "Apps/MasterService/MasterService.Api/MasterService.Api.csproj"
@@ -25,6 +26,9 @@ RUN dotnet publish "MasterService.Api.csproj" -c Release -o /app/publish /p:UseA
 # Stage 3: Final Runtime Image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
+# IMPORTANT: .NET 8 defaults to port 8080.
+# We force it to 80 to match your K8s/Docker settings.
+ENV ASPNETCORE_URLS=http://+:80
 EXPOSE 80
 EXPOSE 443
 COPY --from=publish /app/publish .
