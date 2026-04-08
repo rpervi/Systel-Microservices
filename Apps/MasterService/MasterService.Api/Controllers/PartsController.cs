@@ -32,9 +32,6 @@ public class PartsController : ControllerBase
         return Ok(parts);
     }
 
-
-
-
     // GET: api/parts/5
     [HttpGet("{id}")]
     public async Task<ActionResult<PartMaster>> GetPart(int id)
