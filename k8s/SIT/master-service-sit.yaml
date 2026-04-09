@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: master-api-deployment
+  namespace: sit # <--- Isolated!
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: master-api
+  template:
+    metadata:
+      labels:
+        app: master-api
+    spec:
+      containers:
+      - name: master-api
+        image: ghcr.io/rpervi/systel-microservices/master-api:sit-latest # <--- SIT tag
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Staging" # SIT usually runs in Staging mode
+        - name: ConnectionStrings__DefaultConnection
+          valueFrom:
+            secretKeyRef:
+              name: mssql-secret
+              key: connection-string
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: master-api-service
+  namespace: sit
+spec:
+  selector:
+    app: master-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
