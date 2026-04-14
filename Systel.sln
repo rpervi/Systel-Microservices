@@ -3,21 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MasterService", "MasterService", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Systel.Shared", "Systel.Shared\Systel.Shared.csproj", "{62D7311B-3F6C-6BF4-2423-C0087821C7EA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CustomerService", "CustomerService", "{EAC0F9D9-8411-49C1-9891-986F73B0F589}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerService.Api", "CustomerService\CustomerService.Api\CustomerService.Api.csproj", "{B10B4CE1-1EC6-1B08-1171-83B1F4065998}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dev", "dev", "{FDB88B3E-47C9-453D-9942-C5E8AFAF2874}"
 	ProjectSection(SolutionItems) = preProject
-		docker-compose.yml = docker-compose.yml
+		k8s\DEV\master-service.yaml = k8s\DEV\master-service.yaml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{0D047059-1B91-4D39-99FD-7FAD68FF53CB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sit", "sit", "{A50C0270-2730-4EA4-8A63-760BB5458480}"
 	ProjectSection(SolutionItems) = preProject
-		k8s\master-service.yaml = k8s\master-service.yaml
+		k8s\SIT\master-service-sit.yaml = k8s\SIT\master-service-sit.yaml
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{FE98C94F-51AF-4699-8C1A-7EBF0426A2F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MasterService", "MasterService", "{746B89DB-2745-40AF-B388-DEE729E997C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CustomerService", "CustomerService", "{06E46875-4477-45A0-847F-05615D9937A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterService.Api", "Apps\MasterService\MasterService.Api\MasterService.Api.csproj", "{F3384A99-F92B-35A7-A2DD-3B921497545A}"
 EndProject
@@ -27,7 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterService.Domain", "App
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterService.Infrastructure", "Apps\MasterService\MasterService.Infrastructure\MasterService.Infrastructure.csproj", "{27B42CB7-AD79-E04B-70FB-479DBAB570BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Systel.Shared", "Systel.Shared\Systel.Shared.csproj", "{5A61D26B-1BF0-456C-A989-E9CCFE5BF7FA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +42,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B10B4CE1-1EC6-1B08-1171-83B1F4065998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B10B4CE1-1EC6-1B08-1171-83B1F4065998}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B10B4CE1-1EC6-1B08-1171-83B1F4065998}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B10B4CE1-1EC6-1B08-1171-83B1F4065998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62D7311B-3F6C-6BF4-2423-C0087821C7EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62D7311B-3F6C-6BF4-2423-C0087821C7EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62D7311B-3F6C-6BF4-2423-C0087821C7EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62D7311B-3F6C-6BF4-2423-C0087821C7EA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F3384A99-F92B-35A7-A2DD-3B921497545A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F3384A99-F92B-35A7-A2DD-3B921497545A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3384A99-F92B-35A7-A2DD-3B921497545A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,20 +62,19 @@ Global
 		{27B42CB7-AD79-E04B-70FB-479DBAB570BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27B42CB7-AD79-E04B-70FB-479DBAB570BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27B42CB7-AD79-E04B-70FB-479DBAB570BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A61D26B-1BF0-456C-A989-E9CCFE5BF7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A61D26B-1BF0-456C-A989-E9CCFE5BF7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A61D26B-1BF0-456C-A989-E9CCFE5BF7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A61D26B-1BF0-456C-A989-E9CCFE5BF7FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B10B4CE1-1EC6-1B08-1171-83B1F4065998} = {EAC0F9D9-8411-49C1-9891-986F73B0F589}
-		{F3384A99-F92B-35A7-A2DD-3B921497545A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{D8622E1F-39D7-3381-DBED-20940480D4DC} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{A45EEEAE-31D8-D70C-E912-39DAB86037D6} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{27B42CB7-AD79-E04B-70FB-479DBAB570BF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{FDB88B3E-47C9-453D-9942-C5E8AFAF2874} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A50C0270-2730-4EA4-8A63-760BB5458480} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{746B89DB-2745-40AF-B388-DEE729E997C9} = {FE98C94F-51AF-4699-8C1A-7EBF0426A2F9}
+		{06E46875-4477-45A0-847F-05615D9937A2} = {FE98C94F-51AF-4699-8C1A-7EBF0426A2F9}
+		{F3384A99-F92B-35A7-A2DD-3B921497545A} = {746B89DB-2745-40AF-B388-DEE729E997C9}
+		{D8622E1F-39D7-3381-DBED-20940480D4DC} = {746B89DB-2745-40AF-B388-DEE729E997C9}
+		{A45EEEAE-31D8-D70C-E912-39DAB86037D6} = {746B89DB-2745-40AF-B388-DEE729E997C9}
+		{27B42CB7-AD79-E04B-70FB-479DBAB570BF} = {746B89DB-2745-40AF-B388-DEE729E997C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F47AA08-F49C-4B56-A4B8-F178F9926942}
