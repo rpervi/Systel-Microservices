@@ -18,6 +18,9 @@ public class PartsController : ControllerBase
         _logger = logger;
     }
 
+
+
+
     // GET: api/parts
     [HttpGet]
     public async Task<ActionResult<IEnumerable<PartMaster>>> GetParts()
