@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MasterService.Application.Interfaces;
+﻿using MasterService.Application.Interfaces;
 using MasterService.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MasterService.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class PartsController : ControllerBase
@@ -17,9 +19,6 @@ public class PartsController : ControllerBase
         _repository = repository;
         _logger = logger;
     }
-
-
-
 
     // GET: api/parts
     [HttpGet]
