@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36109.1
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11709.299
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Systel.Shared", "Systel.Shared\Systel.Shared.csproj", "{62D7311B-3F6C-6BF4-2423-C0087821C7EA}"
 EndProject
@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{02EA681E-C7D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dev", "dev", "{FDB88B3E-47C9-453D-9942-C5E8AFAF2874}"
 	ProjectSection(SolutionItems) = preProject
+		k8s\dev\bff-service.yaml = k8s\dev\bff-service.yaml
 		k8s\DEV\master-service.yaml = k8s\DEV\master-service.yaml
 	EndProjectSection
 EndProject
@@ -33,7 +34,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterService.Infrastructur
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
 		docker-compose.yml = docker-compose.yml
+		editorconfig = editorconfig
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BFFService", "BFFService", "{56168C0B-C856-42F7-984D-002A7B49837A}"

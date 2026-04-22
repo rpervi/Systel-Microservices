@@ -1,0 +1,201 @@
+# Remove the line below if you want to inherit .editorconfig settings from higher directories
+root = true
+
+# C# files
+[*.cs]
+
+##########################################
+#### Core EditorConfig and Formatting ####
+##########################################
+
+# Indentation and spacing
+indent_style = space
+indent_size = 4
+tab_width = 4
+
+# New line preferences
+end_of_line = crlf
+insert_final_newline = false
+
+##########################################
+#### .NET Formatting and Code Style   ####
+##########################################
+
+# this. preferences
+dotnet_style_qualification_for_event = false
+dotnet_style_qualification_for_field = false
+dotnet_style_qualification_for_method = false
+dotnet_style_qualification_for_property = false
+
+# Language keyword preferences
+dotnet_style_predefined_type_for_locals_parameters_members = true:error
+dotnet_style_predefined_type_for_member_access = true:error
+
+# Expression preferences
+dotnet_style_object_initializer = true
+dotnet_style_collection_initializer = true
+dotnet_style_explicit_tuple_names = true
+dotnet_style_prefer_auto_properties = true
+dotnet_style_prefer_conditional_expression_over_return = true
+dotnet_style_prefer_conditional_expression_over_assignment = true
+dotnet_style_prefer_null_propagation = true
+dotnet_style_operator_placement_when_wrapping = beginning_of_line
+
+# var preferences
+csharp_style_var_when_type_is_apparent = false
+csharp_style_var_elsewhere = false
+csharp_style_var_for_built_in_types = false
+
+# Expression-bodied members
+csharp_style_expression_bodied_methods = false
+csharp_style_expression_bodied_properties = true
+csharp_style_expression_bodied_indexers = true
+
+# Modifier preferences
+csharp_style_prefer_readonly_struct = true
+csharp_preferred_modifier_order = public,private,protected,internal,file,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,required,volatile,async
+
+# Braces
+csharp_prefer_braces = true
+
+# Namespace declaration
+csharp_style_namespace_declarations = block_scoped
+
+# Using directive preferences
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+csharp_using_directive_placement = outside_namespace:warning
+
+##########################################
+#### Naming Styles & Rules            ####
+##########################################
+
+# Style definitions
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
+dotnet_naming_style.camel_case_style.capitalization = camel_case
+
+dotnet_naming_style.prefix_i_pascal_case.capitalization = pascal_case
+dotnet_naming_style.prefix_i_pascal_case.required_prefix = I
+
+dotnet_naming_style.prefix_underscore_camel_case.capitalization = camel_case
+dotnet_naming_style.prefix_underscore_camel_case.required_prefix = _
+
+##########################################
+#### Symbol Groups                    ####
+##########################################
+
+# Namespace
+dotnet_naming_symbols.namespace_symbols.applicable_kinds = namespace
+
+# Class
+dotnet_naming_symbols.class_symbols.applicable_kinds = class
+dotnet_naming_symbols.class_symbols.applicable_accessibilities = *
+
+# Interface
+dotnet_naming_symbols.interface_symbols.applicable_kinds = interface
+dotnet_naming_symbols.interface_symbols.applicable_accessibilities = *
+
+# Method
+dotnet_naming_symbols.method_symbols.applicable_kinds = method
+dotnet_naming_symbols.method_symbols.applicable_accessibilities = *
+
+# Public Fields
+dotnet_naming_symbols.public_field_symbols.applicable_kinds = field
+dotnet_naming_symbols.public_field_symbols.applicable_accessibilities = public
+
+# Private Fields
+dotnet_naming_symbols.private_field_symbols.applicable_kinds = field
+dotnet_naming_symbols.private_field_symbols.applicable_accessibilities = private
+
+# Properties
+dotnet_naming_symbols.property_symbols.applicable_kinds = property
+dotnet_naming_symbols.property_symbols.applicable_accessibilities = *
+
+# Local Variables
+dotnet_naming_symbols.local_variable_symbols.applicable_kinds = local
+
+# Parameters
+dotnet_naming_symbols.parameter_symbols.applicable_kinds = parameter
+
+# Constants
+dotnet_naming_symbols.constant_symbols.applicable_kinds = field
+dotnet_naming_symbols.constant_symbols.required_modifiers = const
+
+# Enums
+dotnet_naming_symbols.enum_symbols.applicable_kinds = enum
+
+##########################################
+#### Naming Rules                     ####
+##########################################
+
+# Namespace must be PascalCase
+dotnet_naming_rule.namespace_should_be_pascal.severity = warning
+dotnet_naming_rule.namespace_should_be_pascal.symbols = namespace_symbols
+dotnet_naming_rule.namespace_should_be_pascal.style = pascal_case_style
+
+# Class must be PascalCase
+dotnet_naming_rule.class_should_be_pascal.severity = error
+dotnet_naming_rule.class_should_be_pascal.symbols = class_symbols
+dotnet_naming_rule.class_should_be_pascal.style = pascal_case_style
+
+# Interface must start with I and be PascalCase
+dotnet_naming_rule.interface_should_start_with_i.severity = error
+dotnet_naming_rule.interface_should_start_with_i.symbols = interface_symbols
+dotnet_naming_rule.interface_should_start_with_i.style = prefix_i_pascal_case
+
+# Method names must be PascalCase
+dotnet_naming_rule.method_should_be_pascal.severity = error
+dotnet_naming_rule.method_should_be_pascal.symbols = method_symbols
+dotnet_naming_rule.method_should_be_pascal.style = pascal_case_style
+
+# Public fields must be PascalCase
+dotnet_naming_rule.public_field_should_be_pascal.severity = error
+dotnet_naming_rule.public_field_should_be_pascal.symbols = public_field_symbols
+dotnet_naming_rule.public_field_should_be_pascal.style = pascal_case_style
+
+# Private fields must be _camelCase
+dotnet_naming_rule.private_field_should_be_underscore_camel.severity = error
+dotnet_naming_rule.private_field_should_be_underscore_camel.symbols = private_field_symbols
+dotnet_naming_rule.private_field_should_be_underscore_camel.style = prefix_underscore_camel_case
+
+# Properties must be PascalCase
+dotnet_naming_rule.property_should_be_pascal.severity = error
+dotnet_naming_rule.property_should_be_pascal.symbols = property_symbols
+dotnet_naming_rule.property_should_be_pascal.style = pascal_case_style
+
+# Local variables must be camelCase
+dotnet_naming_rule.local_variable_should_be_camel.severity = error
+dotnet_naming_rule.local_variable_should_be_camel.symbols = local_variable_symbols
+dotnet_naming_rule.local_variable_should_be_camel.style = camel_case_style
+
+# Method parameters must be camelCase
+dotnet_naming_rule.parameter_should_be_camel.severity = error
+dotnet_naming_rule.parameter_should_be_camel.symbols = parameter_symbols
+dotnet_naming_rule.parameter_should_be_camel.style = camel_case_style
+
+# Constants must be PascalCase
+dotnet_naming_rule.constant_should_be_pascal.severity = error
+dotnet_naming_rule.constant_should_be_pascal.symbols = constant_symbols
+dotnet_naming_rule.constant_should_be_pascal.style = pascal_case_style
+
+# Enums must be PascalCase
+dotnet_naming_rule.enum_should_be_pascal.severity = error
+dotnet_naming_rule.enum_should_be_pascal.symbols = enum_symbols
+dotnet_naming_rule.enum_should_be_pascal.style = pascal_case_style
+
+## Custom errors using StyleCop ##
+
+# Use string.Empty instead of ""
+dotnet_diagnostic.SA1122.severity = error
+
+# Field names must not contain underscore
+dotnet_diagnostic.SA1310.severity = error
+dotnet_diagnostic.SA1309.severity = none
+
+# Documentation not compulsory
+dotnet_diagnostic.SA1600.severity = none
+
+# Namespace
+dotnet_diagnostic.SA1200.severity = none
+
+

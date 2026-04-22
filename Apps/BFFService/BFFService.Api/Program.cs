@@ -3,6 +3,7 @@ using BFFService.Infrastructure.ExternalServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Systel.Shared.Filters;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -81,21 +82,24 @@ builder.Services.AddSwaggerGen(opt =>
         Scheme = "bearer"
     });
 
-    // 2. Make sure Swagger uses that scheme for every request
-    opt.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new string[]{}
-        }
-    });
+    // Use a custom OperationFilter instead of a global requirement
+    opt.OperationFilter<AuthorizeCheckOperationFilter>();
+
+    //// 2. Make sure Swagger uses that scheme for every request
+    //opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+    //{
+    //    {
+    //        new OpenApiSecurityScheme
+    //        {
+    //            Reference = new OpenApiReference
+    //            {
+    //                Type = ReferenceType.SecurityScheme,
+    //                Id = "Bearer"
+    //            }
+    //        },
+    //        new string[]{}
+    //    }
+    //});
 });
 // Add these BEFORE builder.Build()
 builder.Services.AddHttpContextAccessor();

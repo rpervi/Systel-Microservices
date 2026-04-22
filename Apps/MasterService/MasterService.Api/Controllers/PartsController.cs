@@ -64,4 +64,19 @@ public class PartsController : ControllerBase
         // Returns 201 Created with the new ID
         return CreatedAtAction(nameof(GetPart), new { id = newPartId }, newPartId);
     }
+
+    [HttpGet("records")]
+    public async Task<ActionResult<IEnumerable<UserRecord>>> GetUserRecords()
+    {
+        _logger.LogInformation("MasterService: Fetching user records.");
+
+        // Replace this with your repository call later: await _repository.GetUserRecordsAsync();
+        var records = new List<UserRecord>
+    {
+        new UserRecord("Raj Pervi", "rpervi@inevia.co"),
+        new UserRecord("Dhanesh Thamke", "Dthamke@inevia.co")
+    };
+
+        return Ok(records);
+    }
 }

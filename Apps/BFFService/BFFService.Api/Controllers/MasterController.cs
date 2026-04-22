@@ -1,9 +1,11 @@
 ﻿using BFFService.Application;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace BFFService.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class MasterController : Controller
@@ -52,7 +54,7 @@ namespace BFFService.Api.Controllers
         public async Task<IActionResult> GetMasterData(int id)
         {
             // 1. Create the request to the internal microservice
-            var request = new HttpRequestMessage(HttpMethod.Get, $"api/master/{id}");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"api/parts/{id}");
 
             // 2. Use the proxy to forward the call (it handles the JWT automatically)
             var response = await _serviceProxy.SendAsync(ClientName, request);
@@ -82,6 +84,24 @@ namespace BFFService.Api.Controllers
             }
 
             return StatusCode((int)response.StatusCode);
+        }
+
+        [HttpGet("users/records")]
+        public async Task<IActionResult> GetUserRecords()
+        {
+            // The path must match the route in MasterService
+            var request = new HttpRequestMessage(HttpMethod.Get, "api/parts/records");
+
+            // Reusing your _serviceProxy logic
+            var response = await _serviceProxy.SendAsync(ClientName, request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return Content(content, "application/json");
+            }
+
+            return StatusCode((int)response.StatusCode, "Unable to fetch user records at this time.");
         }
     }
 }

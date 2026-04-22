@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bff-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bff-service
+  template:
+    metadata:
+      labels:
+        app: bff-service
+    spec:
+      containers:
+      - name: bff-service
+        image: bffservice:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9090
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"
+        # IMPORTANT: Overriding localhost with K8s Service DNS
+        - name: ServiceUrls__MasterService
+          value: "http://master-service-svc:8080/MasterService"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bff-service-svc
+spec:
+  selector:
+    app: bff-service
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 80
+  type: LoadBalancer # Exposes the service to a public IP or localhost
