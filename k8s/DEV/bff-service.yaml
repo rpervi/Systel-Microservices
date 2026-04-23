@@ -21,6 +21,8 @@ spec:
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"
+        - name: ASPNETCORE_URLS
+          value: "http://+:9090"
         # IMPORTANT: Overriding localhost with K8s Service DNS
         - name: ServiceUrls__MasterService
           value: "http://master-service-svc:8080/MasterService"
@@ -35,5 +37,5 @@ spec:
   ports:
     - protocol: TCP
       port: 9090
-      targetPort: 80
+      targetPort: 9090
   type: LoadBalancer # Exposes the service to a public IP or localhost

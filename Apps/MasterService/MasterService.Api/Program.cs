@@ -94,7 +94,8 @@ if (app.Environment.IsDevelopment())
     {
         // 2. Change the endpoint to include the prefix
         //options.SwaggerEndpoint("/MasterService/swagger/v1/swagger.json", "MasterService API V1");
-        options.SwaggerEndpoint("v1/swagger.json", "MasterService API V1");
+        //options.SwaggerEndpoint("v1/swagger.json", "MasterService API V1");
+        options.SwaggerEndpoint("/MasterService/swagger/v1/swagger.json", "MasterService API V1");
 
         // 3. This ensures you can access it at /MasterService/swagger
         //options.RoutePrefix = "MasterService/swagger";

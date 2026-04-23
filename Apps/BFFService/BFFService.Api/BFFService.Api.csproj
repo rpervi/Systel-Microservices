@@ -1,24 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<!-- Use latest stable compatible with .NET 10 -->
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.12" />
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Systel.Shared\Systel.Shared.csproj" />
-    <ProjectReference Include="..\BFFService.Application\BFFService.Application.csproj" />
-    <ProjectReference Include="..\BFFService.Infrastructure\BFFService.Infrastructure.csproj" />
-  </ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.7" />
+
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<!-- MUST MATCH Systel.Shared (7.0.0) -->
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Systel.Shared\Systel.Shared.csproj" />
+		<ProjectReference Include="..\BFFService.Application\BFFService.Application.csproj" />
+		<ProjectReference Include="..\BFFService.Infrastructure\BFFService.Infrastructure.csproj" />
+	</ItemGroup>
 
 </Project>

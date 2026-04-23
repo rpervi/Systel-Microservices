@@ -1,30 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Abstractions" Version="2.3.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.Abstractions" Version="2.3.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.12" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.5" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<!-- REMOVE all AspNetCore.* packages from 2.x and 8.x -->
+		<!-- JwtBearer is OK, but update to match .NET 10 compatibility -->
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.12" />
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Systel.Shared\Systel.Shared.csproj" />
-    <ProjectReference Include="..\MasterService.Application\MasterService.Application.csproj" />
-    <ProjectReference Include="..\MasterService.Domain\MasterService.Domain.csproj" />
-    <ProjectReference Include="..\MasterService.Infrastructure\MasterService.Infrastructure.csproj" />
-  </ItemGroup>
+		<!-- EF Core 8 works with .NET 10 -->
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.12" />
+
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.7" />
+
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<!-- IMPORTANT: Match Swashbuckle version with Systel.Shared -->
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Systel.Shared\Systel.Shared.csproj" />
+		<ProjectReference Include="..\MasterService.Application\MasterService.Application.csproj" />
+		<ProjectReference Include="..\MasterService.Domain\MasterService.Domain.csproj" />
+		<ProjectReference Include="..\MasterService.Infrastructure\MasterService.Infrastructure.csproj" />
+	</ItemGroup>
 
 </Project>

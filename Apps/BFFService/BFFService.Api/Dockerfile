@@ -6,6 +6,8 @@ WORKDIR /src
 # Note: We still copy Systel.Shared because BFF depends on it
 COPY ["Systel.Shared/Systel.Shared.csproj", "Systel.Shared/"]
 COPY ["Apps/BFFService/BFFService.Api/BFFService.Api.csproj", "Apps/BFFService/BFFService.Api/"]
+COPY ["Apps/BFFService/BFFService.Application/BFFService.Application.csproj", "Apps/BFFService/BFFService.Application/"]
+COPY ["Apps/BFFService/BFFService.Infrastructure/BFFService.Infrastructure.csproj", "Apps/BFFService/BFFService.Infrastructure/"]
 
 # Restore dependencies
 RUN dotnet restore "Apps/BFFService/BFFService.Api/BFFService.Api.csproj"
