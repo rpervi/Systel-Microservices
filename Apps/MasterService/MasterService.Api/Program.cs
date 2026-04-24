@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens; // Add this
 using Microsoft.OpenApi.Models;
 using Systel.Shared.Exceptions;
+using Systel.Shared.Filters;
 using Systel.Shared.Middleware;
 using System.Text;
 
@@ -42,7 +43,6 @@ builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Systel MasterService", Version = "v1" });
 
-    // 1. Define the "Bearer" security scheme
     opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -53,21 +53,8 @@ builder.Services.AddSwaggerGen(opt =>
         Scheme = "bearer"
     });
 
-    // 2. Make Swagger use the "Bearer" scheme for all operations
-    opt.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new string[]{}
-        }
-    });
+    // Use the filter to handle the "per-method" logic
+    opt.OperationFilter<AuthorizeCheckOperationFilter>();
 });
 
 builder.Services.AddDbContext<MasterDbContext>(options =>

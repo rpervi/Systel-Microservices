@@ -14,25 +14,40 @@ namespace Systel.Shared.Filters
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
-            // 1. Check if the Action (Method) has [AllowAnonymous] - this always wins
-            var hasAllowAnonymous = context.MethodInfo.GetCustomAttributes(true).OfType<AllowAnonymousAttribute>().Any();
+            // [AllowAnonymous] on the action always wins — skip everything
+            var actionAllowsAnon = context.MethodInfo
+                .GetCustomAttributes(true)
+                .OfType<AllowAnonymousAttribute>()
+                .Any();
 
-            if (hasAllowAnonymous) return;
+            if (actionAllowsAnon) return;
 
-            // 2. Check if the Controller has [Authorize]
+            // [AllowAnonymous] on the controller also skips (unless action overrides with [Authorize])
+            var controllerAllowsAnon = context.MethodInfo.DeclaringType?
+                .GetCustomAttributes(true)
+                .OfType<AllowAnonymousAttribute>()
+                .Any() ?? false;
+
+            var actionHasAuthorize = context.MethodInfo
+                .GetCustomAttributes(true)
+                .OfType<AuthorizeAttribute>()
+                .Any();
+
             var controllerHasAuthorize = context.MethodInfo.DeclaringType?
-                .GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any() ?? false;
+                .GetCustomAttributes(true)
+                .OfType<AuthorizeAttribute>()
+                .Any() ?? false;
 
-            // 3. Check if the Action itself has [Authorize]
-            var actionHasAuthorize = context.MethodInfo.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any();
+            // Controller [AllowAnonymous] wins UNLESS the action itself has [Authorize]
+            if (controllerAllowsAnon && !actionHasAuthorize) return;
 
-            // If either the Controller or the Action is protected, add the security requirement
+            // Apply lock icon only when authorize is required
             if (controllerHasAuthorize || actionHasAuthorize)
             {
                 operation.Responses.TryAdd("401", new OpenApiResponse { Description = "Unauthorized" });
                 operation.Responses.TryAdd("403", new OpenApiResponse { Description = "Forbidden" });
 
-                var oidcRequirement = new OpenApiSecurityRequirement
+                var securityRequirement = new OpenApiSecurityRequirement
                 {
                     [
                         new OpenApiSecurityScheme
@@ -43,10 +58,10 @@ namespace Systel.Shared.Filters
                                 Id = "Bearer"
                             }
                         }
-                    ] = new string[] { }
+                    ] = Array.Empty<string>()
                 };
 
-                operation.Security = new List<OpenApiSecurityRequirement> { oidcRequirement };
+                operation.Security = new List<OpenApiSecurityRequirement> { securityRequirement };
             }
         }
     }
