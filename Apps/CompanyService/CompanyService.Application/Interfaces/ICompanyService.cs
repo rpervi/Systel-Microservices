@@ -1,4 +1,5 @@
 ﻿using CompanyService.Domain.Entities;
+using Systel.Shared.ResponseEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace CompanyService.Application.Interfaces
 {
     public interface ICompanyService
     {
-        Task<IEnumerable<companymaster>> GetAllCompaniesAsync();
-        Task<companymaster?> GetCompanyByIdAsync(int id);
-        Task<bool> CreateCompanyAsync(companymaster company);
-        Task<bool> UpdateCompanyAsync(companymaster company);
-        Task<bool> DeleteCompanyAsync(int id);
+        Task<ResponseEntity<IEnumerable<companymaster>>> GetAllCompaniesAsync();
+        Task<ResponseEntity<companymaster?>> GetCompanyByIdAsync(int id);
+        Task<ResponseEntity<bool>> CreateCompanyAsync(companymaster company);
+        Task<ResponseEntity<bool>> UpdateCompanyAsync(companymaster company);
+        Task<ResponseEntity<bool>> DeleteCompanyAsync(int id);
     }
 }

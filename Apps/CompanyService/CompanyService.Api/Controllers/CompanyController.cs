@@ -20,15 +20,14 @@ namespace CompanyService.Api.Controllers
         public async Task<IActionResult> GetAll()
         {
             var companies = await _companyService.GetAllCompaniesAsync();
-            return Ok(companies);
+            return StatusCode(companies.StatusCode, companies);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var company = await _companyService.GetCompanyByIdAsync(id);
-            if (company == null) return NotFound();
-            return Ok(company);
+            return StatusCode(company.StatusCode, company); 
         }
 
         [HttpPost]
@@ -37,12 +36,8 @@ namespace CompanyService.Api.Controllers
             if (company == null) return BadRequest();
 
             var result = await _companyService.CreateCompanyAsync(company);
-            if (result)
-            {
-                return CreatedAtAction(nameof(GetById), new { id = company.companyid }, company);
-            }
-
-            return StatusCode(500, "An error occurred while creating the company.");
+            
+            return StatusCode(result.StatusCode, result);
         }
     }
 }
